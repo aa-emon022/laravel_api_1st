@@ -37,13 +37,37 @@ class ForOrderController extends Controller
     //     "MAX"=>$max_order->purch_amt
     // ]);
 /*===============📢[ 5 ]✌️=================*/
-$purch_amt_max=order::max('purch_amt');
-$all_customer=order::where('purch_amt',$purch_amt_max)->
-                orderBy('purch_amt','asc')->first();
-return response()->json([
-    "Order_id"=>$all_customer->order_id,
-    "Amount"=>$all_customer->purch_amt
-]);
+// $purch_amt_max=order::max('purch_amt');
+// $all_customer=order::where('purch_amt',$purch_amt_max)->
+//                 orderBy('purch_amt','asc')->get();
+// return response()->json([
+//     "Order_id"=>$all_customer->order_id,
+//     "Amount"=>$all_customer->purch_amt
+// ]);
+//return response()->json($all_customer);
 
+
+/*===============📢[ 5 ]✌️=================*/
+
+// $datas=order::all();
+
+// return response()->json($datas);
+
+
+/*===============📢[ 5 ]✌️=================*/
+   $order=order::select('order_id','salesman_id','order_date')->get();
+
+   $formatted=$order->map(function($order){
+    return [
+    "order_no"=>$order->order_id,
+    "salesman"=>$order->salesman_id,
+    "order_date"=>$order->order_date
+    ];
+   });
+
+   return response()->json([
+    "status"=>"success",
+    "data"=>$formatted
+]);
    }
 }

@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\ForOrderController;
-use App\Http\Controllers\order_controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\PostController;
+// Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('user_post')
 
-Route::post('/orders',[order_controller::class,'store']);
-Route::get('order_data',[ForOrderController::class,'Order_aggregate']);
+});
